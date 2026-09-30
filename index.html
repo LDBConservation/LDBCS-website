@@ -1,0 +1,837 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LDBCS | Laguna de Bay Conservation Steward</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      color: #173b32;
+      background: #f4fbf7;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 67, 52, 0.97);
+      padding: 12px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      color: #9be7bd;
+    }
+
+    .language-btn {
+      border: none;
+      background: #8de0b0;
+      color: #073c2d;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 20px;
+      background:
+        linear-gradient(rgba(3, 58, 43, 0.72), rgba(3, 58, 43, 0.72)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .hero h1 {
+      font-size: clamp(35px, 7vw, 70px);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 13px 25px;
+      background: #9be7bd;
+      color: #073c2d;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+    }
+
+    /* GENERAL */
+    section {
+      padding: 75px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      color: #07533e;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #55766c;
+    }
+
+    .content {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .content p {
+      margin-bottom: 18px;
+      text-align: justify;
+    }
+
+    /* CARDS */
+    .cards {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+      border-top: 5px solid #2d9b70;
+    }
+
+    .card h3 {
+      color: #07533e;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #49665d;
+    }
+
+    /* MISSION / VISION */
+    .green-section {
+      background: #e3f5eb;
+    }
+
+    .mv-card {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .mv-card h3 {
+      color: #07533e;
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    /* NUMBERED LIST */
+    .action {
+      counter-reset: action;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .action-item {
+      background: white;
+      padding: 25px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .action-item h3 {
+      color: #07533e;
+      margin-bottom: 8px;
+    }
+
+    /* CAMPAIGN */
+    .campaign {
+      background: #07533e;
+      color: white;
+    }
+
+    .campaign .section-title h2,
+    .campaign .section-title p {
+      color: white;
+    }
+
+    .campaign-box {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(255,255,255,0.1);
+      padding: 35px;
+      border-radius: 20px;
+    }
+
+    .campaign-box h3 {
+      color: #a9edc7;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    .campaign-box p {
+      margin-bottom: 15px;
+    }
+
+    .campaign-box ul {
+      margin: 10px 0 20px 25px;
+    }
+
+    /* PETITION */
+    .petition {
+      text-align: center;
+      background: #d9f1e4;
+    }
+
+    .petition-box {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .petition h2 {
+      color: #07533e;
+      margin-bottom: 20px;
+    }
+
+    .petition strong {
+      color: #07533e;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #043b2d;
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    footer h3 {
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: #b8d8cb;
+      font-size: 14px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 700px) {
+
+      nav {
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      section {
+        padding: 55px 5%;
+      }
+
+      .hero {
+        min-height: 75vh;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .content p {
+        text-align: left;
+      }
+
+      .card,
+      .mv-card,
+      .campaign-box,
+      .petition-box {
+        padding: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#home" class="logo">LDBCS</a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#advocacies">Advocacies</a></li>
+      <li><a href="#campaign">Campaign</a></li>
+      <li><a href="#petition">Petition</a></li>
+    </ul>
+
+    <button class="language-btn" onclick="toggleLanguage()">
+      Filipino
+    </button>
+  </nav>
+
+
+  <!-- HOME -->
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <h1>THE LAGUNA DE BAY<br>CONSERVATION STEWARD</h1>
+
+      <p>
+        Protect the Bay. Prevent the Bay-sura.
+        Preserve the Bay for generations.
+      </p>
+
+      <p>
+        City of Santa Rosa, Laguna
+      </p>
+
+      <a href="#about" class="hero-btn">Explore Our Mission</a>
+    </div>
+  </header>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title">
+      <h2>About Us</h2>
+      <p>A community-driven movement for Laguna de Bay</p>
+    </div>
+
+    <div class="content">
+
+      <p>
+        We are a community-driven group dedicated to protecting,
+        preserving, and promoting the sustainable future of Laguna de Bay.
+        We believe that the responsibility of caring for one of the
+        Philippines’ most important natural resources does not rest solely
+        on the government.
+      </p>
+
+      <p>
+        It is a shared responsibility that calls for the active participation
+        of communities, businesses, farmers, fisherfolk, organizations,
+        and every individual who benefits from the lake and its resources.
+      </p>
+
+      <p>
+        Through information and awareness campaigns, educational initiatives,
+        volunteer activities, environmental cleanups, community programs,
+        and other conservation projects, we aim to inspire people to take
+        meaningful action for Laguna de Bay.
+      </p>
+
+      <p>
+        Our goal is not only to protect the lake today, but also to help
+        ensure that Laguna de Bay remains a healthy, productive, and
+        valuable part of our communities for generations to come.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- MISSION / VISION -->
+  <section class="green-section" id="mission">
+
+    <div class="section-title">
+      <h2>Mission & Vision</h2>
+    </div>
+
+    <div class="content">
+
+      <div class="mv-card">
+        <h3>Our Mission</h3>
+
+        <p>
+          To protect, preserve, and promote the sustainable management of
+          Laguna de Bay by empowering communities and encouraging collective
+          environmental responsibility.
+        </p>
+
+        <p>
+          We aim to raise awareness about the importance of the lake,
+          promote responsible waste management and sustainable practices,
+          support conservation and rehabilitation activities, and encourage
+          meaningful participation from communities, fisherfolk, farmers,
+          businesses, organizations, and individuals.
+        </p>
+
+        <p>
+          Through education, advocacy, volunteerism, community-based projects,
+          and collaboration with stakeholders, we strive to help safeguard
+          the lake’s ecosystems and natural resources.
+        </p>
+      </div>
+
+      <div class="mv-card">
+        <h3>Our Vision</h3>
+
+        <p>
+          A clean, healthy, and thriving Laguna de Bay where people and
+          nature coexist in harmony, communities actively participate in
+          environmental conservation, and the lake’s resources are
+          responsibly protected and sustained for present and future
+          generations.
+        </p>
+
+        <p>
+          We envision Laguna de Bay as a resilient and ecologically balanced
+          lake—free from preventable pollution, rich in biodiversity, and
+          capable of continuing to support the livelihoods, well-being,
+          and communities that depend on it.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- STORY -->
+  <section id="story">
+
+    <div class="section-title">
+      <h2>Our Story</h2>
+      <p>From awareness comes responsibility. From responsibility comes action.</p>
+    </div>
+
+    <div class="content">
+
+      <p>
+        Laguna de Bay has long been an important part of the lives and
+        livelihoods of communities surrounding it. It provides resources
+        for fisherfolk and farmers, supports biodiversity, and serves as
+        an important natural resource for the region.
+      </p>
+
+      <p>
+        However, as communities, businesses, industries, and agricultural
+        activities expanded around the lake, the pressures placed on its
+        environment also increased.
+      </p>
+
+      <p>
+        Over time, different forms of waste began making their way into
+        the lake. Pollutants, together with erosion and sedimentation,
+        contributed to the deterioration of water quality.
+      </p>
+
+      <p>
+        The degradation of Laguna de Bay is therefore not simply an
+        environmental problem—it is a community problem. The lake is
+        connected to the daily activities of the people living around its
+        watershed.
+      </p>
+
+      <p>
+        The Laguna de Bay Conservation Steward emerges from the belief
+        that protecting Laguna de Bay cannot be the responsibility of one
+        institution alone.
+      </p>
+
+      <p>
+        Through environmental education, information campaigns, volunteer
+        activities, clean-up initiatives, community projects, and
+        responsible waste-management advocacy, the organization aims to
+        help people understand the problems facing the lake and the role
+        they can play in addressing them.
+      </p>
+
+      <p>
+        The name “Conservation Steward” reflects this purpose. A steward
+        is someone who takes responsibility for caring for something
+        valuable—not because they own it, but because they recognize its
+        importance and understand that it must be protected for others.
+      </p>
+
+      <p>
+        The story of Laguna de Bay Conservation Steward is therefore not
+        only a story about a lake affected by pollution. It is a story
+        about people choosing to take responsibility for the future of
+        the lake.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ADVOCACIES -->
+  <section class="green-section" id="advocacies">
+
+    <div class="section-title">
+      <h2>Our Advocacies</h2>
+      <p>Two calls to action for a healthier Laguna de Bay</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>🌊 Laguna de Bye?</h3>
+
+        <p>
+          <strong>Not on Our Watch: Stop the Bay-sura!</strong>
+        </p>
+
+        <p>
+          Laguna de Bay is more than a body of water. It is a source of
+          livelihood, food, biodiversity, and a part of the communities
+          that surround it.
+        </p>
+
+        <p>
+          Pollution does not begin in the middle of the lake. It begins
+          where waste is produced and where it is improperly managed.
+        </p>
+
+        <p>
+          Segregate your waste properly, reduce unnecessary single-use
+          plastics, protect waterways, and support responsible waste
+          management.
+        </p>
+
+        <p>
+          <strong>
+            The lake is shared. The responsibility is shared.
+            The action starts with us.
+          </strong>
+        </p>
+      </div>
+
+
+      <div class="card">
+        <h3>🐟 Something Smells Fishy</h3>
+
+        <p>
+          <strong>Rescue Our Waters</strong>
+        </p>
+
+        <p>
+          Laguna de Bay provides food, supports livelihoods, and sustains
+          communities around its shores.
+        </p>
+
+        <p>
+          Fisheries face multiple challenges, including declining water
+          quality, invasive species, and competing uses of the lake.
+        </p>
+
+        <p>
+          Support responsible local fisherfolk, protect native aquatic
+          life, and support science-based conservation programs.
+        </p>
+
+        <p>
+          <strong>
+            Protect the water. Support the fisherfolk.
+            Restore the balance. Save the Bay.
+          </strong>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CAMPAIGN -->
+  <section class="campaign" id="campaign">
+
+    <div class="section-title">
+      <h2>Oplan Estero-Hero</h2>
+      <p>FILTER FIRST. FLOW CLEAN.</p>
+    </div>
+
+    <div class="campaign-box">
+
+      <h3>“Ang malinis na lawa, nag-uumpisa sa tapat ng ating kalsada.”</h3>
+
+      <p>
+        Protecting a lake does not always begin at the lake itself.
+        It begins with the water flowing toward it.
+      </p>
+
+      <p>
+        Behind our houses, beside our roads, and through our barangays
+        are countless esteros, creeks, drainage channels, and small
+        waterways that carry water through communities.
+      </p>
+
+      <p>
+        Oplan Estero-Hero transforms ordinary residents into
+        “Estero-Heroes”—people who take responsibility for the waterways
+        closest to them.
+      </p>
+
+
+      <h3>1. Find Your Estero</h3>
+
+      <p>
+        Identify the creeks, drainage channels, canals, and waterways
+        surrounding your neighborhood. Know where the water comes from,
+        where it flows, and where it eventually goes.
+      </p>
+
+
+      <h3>2. Filter First</h3>
+
+      <p>
+        Prevent waste from entering waterways in the first place.
+        Practice proper waste segregation and disposal at home.
+      </p>
+
+
+      <h3>3. Clean the Flow</h3>
+
+      <p>
+        Organize community-based cleanup activities in appropriate and
+        safe areas. Residents, youth organizations, schools, businesses,
+        and barangay groups can work together to remove accumulated litter.
+      </p>
+
+
+      <h3>4. Watch the Water</h3>
+
+      <p>
+        Be observant. Unusual odors, discoloration, excessive waste,
+        illegal dumping, and other visible environmental problems can
+        be signs that a waterway needs attention.
+      </p>
+
+
+      <h3>5. Keep It Clean</h3>
+
+      <p>
+        A cleanup should not be a one-day activity. The real goal is to
+        develop habits that prevent waterways from becoming polluted again.
+      </p>
+
+
+      <h3>Who Can Be an Estero-Hero?</h3>
+
+      <ul>
+        <li>Dispose of waste properly.</li>
+        <li>Keep garbage away from drains and waterways.</li>
+        <li>Participate in community cleanups.</li>
+        <li>Encourage neighbors to practice proper waste management.</li>
+        <li>Report illegal dumping and environmental concerns.</li>
+        <li>Support barangay environmental programs.</li>
+        <li>Teach young people to respect local waterways.</li>
+      </ul>
+
+
+      <h3>From One Estero to the Entire Bay</h3>
+
+      <p>
+        We don't have to clean the entire lake in one day.
+        We can start with the water flowing past our own homes.
+      </p>
+
+      <p>
+        <strong>
+          BE AN ESTERO-HERO.
+        </strong>
+      </p>
+
+      <p>
+        Find your waterway. Keep waste out. Protect the flow.
+        Report problems. Bring your neighbors together.
+      </p>
+
+      <p>
+        <strong>
+          Filter First. Flow Clean. Protect the Bay.
+        </strong>
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- PETITION -->
+  <section class="petition" id="petition">
+
+    <div class="section-title">
+      <h2>Petition</h2>
+      <p>Protect Laguna de Bay for present and future generations.</p>
+    </div>
+
+    <div class="petition-box">
+
+      <p>
+        Laguna de Bay is more than the largest lake in the Philippines.
+        It is a source of food, livelihood, biodiversity, and natural
+        resources for countless communities surrounding its waters.
+      </p>
+
+      <br>
+
+      <p>
+        Yet the lake continues to face environmental pressures brought by
+        pollution, improper waste management, urbanization, industrial
+        and agricultural activities, declining water quality, invasive
+        species, and other human and environmental pressures.
+      </p>
+
+      <br>
+
+      <p>
+        These challenges affect not only the lake itself, but also the
+        people and communities whose lives and livelihoods are connected
+        to it.
+      </p>
+
+      <br>
+
+      <p>
+        <strong>
+          We believe that protecting Laguna de Bay cannot be the
+          responsibility of the government alone.
+        </strong>
+      </p>
+
+      <br>
+
+      <p>
+        It is a shared responsibility among communities, households,
+        businesses, farmers, fisherfolk, schools, organizations,
+        local governments, environmental groups, and every individual
+        who benefits from the lake and its resources.
+      </p>
+
+      <br>
+
+      <p>
+        As The Laguna de Bay Conservation Steward, we are calling for
+        collective action to protect and preserve the lake for present
+        and future generations.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <h3>THE LAGUNA DE BAY CONSERVATION STEWARD</h3>
+
+    <p>City of Santa Rosa, Laguna</p>
+
+    <br>
+
+    <p>
+      Protect the Bay • Prevent the Bay-sura • Preserve the Bay
+    </p>
+
+    <br>
+
+    <p>
+      © 2026 Laguna de Bay Conservation Steward
+    </p>
+
+  </footer>
+
+
+  <!-- LANGUAGE BUTTON -->
+  <script>
+
+    let filipino = false;
+
+    function toggleLanguage() {
+
+      if (!filipino) {
+
+        alert(
+          "Filipino translation can be added to every section of the website. " +
+          "This button is ready for the Filipino version."
+        );
+
+        document.querySelector(".language-btn").innerText = "English";
+
+        filipino = true;
+
+      } else {
+
+        alert("English version selected.");
+
+        document.querySelector(".language-btn").innerText = "Filipino";
+
+        filipino = false;
+      }
+    }
+
+  </script>
+
+</body>
+</html>
+```
